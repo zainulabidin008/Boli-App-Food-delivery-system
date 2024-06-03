@@ -77,6 +77,8 @@ Widget customTextFormField(
     {
       TextInputType? keyboardType,
       IconData? prefixIcon,
+      final ValueChanged<String>? onChanged,
+
       Icon? icon,
       IconButton? sufixIcon,
       Color? iconColor,
@@ -85,6 +87,7 @@ Widget customTextFormField(
       required bool isObsecure,
       EdgeInsetsDirectional? contentPading,
       Color? hintTextColor,
+
     }
     ) {
   return Container(alignment: Alignment.centerLeft,
@@ -102,6 +105,7 @@ Widget customTextFormField(
     child: Padding(
       padding:  EdgeInsets.only(top: .5.h),
       child: TextFormField(
+        onChanged:onChanged,
         cursorHeight: 2.h,
 
         obscureText: isObsecure,

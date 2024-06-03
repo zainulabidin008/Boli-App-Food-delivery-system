@@ -141,7 +141,7 @@ class FavoriteResturant extends StatelessWidget {
                   ),
                   getVerSpace(1.8.h),
                   GestureDetector(onTap:(){
-                    Get.to(()=>const RateResturant());
+                    Get.to(()=> const RateResturant());
                   },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -252,7 +252,7 @@ class FavoriteResturant extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.to(() => ReservationScreen());
+                          Get.to(() => ReservationScreen(selectedIndex: 0,));
                         },
                         child: Container(
                           padding: const EdgeInsets.all(2.0),

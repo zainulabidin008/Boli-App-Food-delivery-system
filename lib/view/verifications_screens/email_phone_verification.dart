@@ -1,6 +1,5 @@
 import 'package:boli_app/constants/constant_textstyle.dart';
 import 'package:boli_app/ui_components/custom_widget.dart';
-import 'package:boli_app/view/verifications_screens/verification_complete.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -32,6 +31,7 @@ final String?title;
                   children: [
                     Text('Change Password',style: TextStyle(fontSize: 16.px,color: const Color(0xff444444,),
                       fontFamily: 'segoeui',fontWeight: FontWeight.w700),),
+                    getVerSpace(.5.h),
                     Text('Enter your registered Email to change your Password',style: TextStyle(fontSize: 10.px,color: const Color(0xff444444,),
                         fontFamily: 'segoeui',fontWeight: FontWeight.w400),),
 
@@ -66,7 +66,7 @@ final String?title;
               ),
               getVerSpace(5.9.h),
               customElevatedButton(() {
-                Get.to(() =>  title=='Email'?const ChangePasswordScreen(title: 'Email',):const EmailOtpScreen());
+                Get.to(() =>  title=='Email'? ChangePasswordScreen(title: 'Email',): const EmailOtpScreen());
               },
                   tittle: 'Done',
                   borColor: ConstantColors.greenColor,
