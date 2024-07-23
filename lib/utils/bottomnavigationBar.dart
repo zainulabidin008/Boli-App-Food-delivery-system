@@ -1,5 +1,3 @@
-
-
 import 'package:boli_app/constants/constant_colors.dart';
 import 'package:boli_app/ui_components/custom_widget.dart';
 import 'package:boli_app/view/menues_screens/menues_screen.dart';
@@ -34,8 +32,9 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   final GetResturantsController getResturantsController =
       Get.put(GetResturantsController());
-  final AddReviewsController addReviewsController=Get.put(AddReviewsController());
-  final MySharedPreferanse mySharedPreferanse= MySharedPreferanse();
+  final AddReviewsController addReviewsController =
+      Get.put(AddReviewsController());
+  final MySharedPreferanse mySharedPreferanse = MySharedPreferanse();
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -48,14 +47,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final AuthenticationsController authenticationsController =
       Get.put(AuthenticationsController());
   RxBool isFav = false.obs;
-  String resturantId='';
+  String resturantId = '';
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getResturantsController.getResturants();
-
   }
 
   @override
@@ -158,318 +156,424 @@ class _BottomNavBarState extends State<BottomNavBar> {
         body: Obx(
           () => Stack(children: [
             selectedIndex.value == 0
-                ? Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 2.5.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        getVerSpace(.5.h),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 1.5.h, vertical: 1.h),
-                          decoration: BoxDecoration(
-                              color: ConstantColors.greenColor,
-                              borderRadius: BorderRadius.circular(10.px)),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Hi, Lita !',
-                                    style: TextStyle(
-                                        fontSize: 12.px,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                        fontFamily: 'segoeui'),
-                                  ),
-                                  getVerSpace(.5.h),
-                                  Text(
-                                    'You have 1400 Reward Points in your Loyalty\n card, redeem them before they expire.',
-                                    style: TextStyle(
-                                        fontSize: 10.px,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white,
-                                        fontFamily: 'segoeui'),
-                                  ),
-                                  getVerSpace(1.h),
-                                  Container(
-                                    alignment: Alignment.center,
-                                    height: 2.h,
-                                    width: 8.5.h,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadius.circular(50.px),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.1),
-                                              blurRadius: 2,
-                                              spreadRadius: 2,
-                                              offset: const Offset(0, 1)),
-                                        ]),
-                                    child: Text(
-                                      'Claim Now',
+                ? SafeArea(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 2.5.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          getVerSpace(.5.h),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 1.5.h, vertical: 1.h),
+                            decoration: BoxDecoration(
+                                color: ConstantColors.greenColor,
+                                borderRadius: BorderRadius.circular(10.px)),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Hi, Lita !',
                                       style: TextStyle(
-                                          fontSize: 10.px,
-                                          color: ConstantColors.greenColor,
+                                          fontSize: 12.px,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
                                           fontFamily: 'segoeui'),
                                     ),
-                                  )
-                                ],
-                              ),
-                              getSvgImage('burgergroup.svg')
-                            ],
-                          ),
-                        ),
-                        getVerSpace(1.6.h),
-                        customTextFormField(
-                          searchControllerForCategory,
-                          'XYZ restaurant',
-                          isObsecure: false,
-                          prefixIcon: Icons.search_sharp,
-                          iconColor: const Color(0xff878787),
-                        ),
-                        getVerSpace(1.6.h),
-                        Text(
-                          'Popular Categories',
-                          style: TextStyle(
-                              fontSize: 14.px,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: 'segoeui',
-                              color: const Color(0xff444444)),
-                        ),
-                        getVerSpace(2.h),
-                        Expanded(
-                          child: GridView.builder(
-                            padding: EdgeInsets.zero,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisSpacing: 1.5.h,
-                                    mainAxisSpacing: 1.5.h,
-                                    crossAxisCount: 2),
-                            itemCount: 10,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Get.to(() => const ItemDetailScreen());
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.only(bottom: 2.h),
-                                  height: 5.h,
-                                  width: MediaQuery.of(context).size.width / 2 -
-                                      2.5.h,
-                                  decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: AssetImage(
-                                              'assets/pngs/item.png')),
-                                      borderRadius:
-                                          BorderRadius.circular(16.px)),
-                                  child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          alignment: Alignment.center,
-                                          height: 3.4.h,
-                                          width: 10.7.h,
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(16.px),
-                                                bottomLeft:
-                                                    Radius.circular(16.px),
-                                              )),
-                                          child: Text(
-                                            'Beverages',
-                                            style: TextStyle(
-                                                fontSize: 13.px,
-                                                fontWeight: FontWeight.w400,
-                                                fontFamily: 'segoeui',
-                                                color: const Color(0xff404040)),
-                                          ),
-                                        )
-                                      ]),
+                                    getVerSpace(.5.h),
+                                    Text(
+                                      'You have 1400 Reward Points in your Loyalty\n card, redeem them before they expire.',
+                                      style: TextStyle(
+                                          fontSize: 10.px,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white,
+                                          fontFamily: 'segoeui'),
+                                    ),
+                                    getVerSpace(1.h),
+                                    Container(
+                                      alignment: Alignment.center,
+                                      height: 2.h,
+                                      width: 8.5.h,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(50.px),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.grey
+                                                    .withOpacity(0.1),
+                                                blurRadius: 2,
+                                                spreadRadius: 2,
+                                                offset: const Offset(0, 1)),
+                                          ]),
+                                      child: Text(
+                                        'Claim Now',
+                                        style: TextStyle(
+                                            fontSize: 10.px,
+                                            color: ConstantColors.greenColor,
+                                            fontFamily: 'segoeui'),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              );
-                            },
+                                getSvgImage('burgergroup.svg')
+                              ],
+                            ),
                           ),
-                        )
-                      ],
+                          getVerSpace(1.6.h),
+                          customTextFormField(
+                            searchControllerForCategory,
+                            'XYZ restaurant',
+                            isObsecure: false,
+                            prefixIcon: Icons.search_sharp,
+                            iconColor: const Color(0xff878787),
+                          ),
+                          getVerSpace(1.6.h),
+                          Text(
+                            'Popular Categories',
+                            style: TextStyle(
+                                fontSize: 14.px,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'segoeui',
+                                color: const Color(0xff444444)),
+                          ),
+                          getVerSpace(2.h),
+                          Expanded(
+                            child: GridView.builder(
+                              padding: EdgeInsets.zero,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisSpacing: 1.5.h,
+                                      mainAxisSpacing: 1.5.h,
+                                      crossAxisCount: 2),
+                              itemCount: 10,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => const ItemDetailScreen());
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.only(bottom: 2.h),
+                                    height: 5.h,
+                                    width:
+                                        MediaQuery.of(context).size.width / 2 -
+                                            2.5.h,
+                                    decoration: BoxDecoration(
+                                        image: const DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage(
+                                                'assets/pngs/item.png')),
+                                        borderRadius:
+                                            BorderRadius.circular(16.px)),
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Container(
+                                            alignment: Alignment.center,
+                                            height: 3.4.h,
+                                            width: 10.7.h,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft:
+                                                      Radius.circular(16.px),
+                                                  bottomLeft:
+                                                      Radius.circular(16.px),
+                                                )),
+                                            child: Text(
+                                              'Beverages',
+                                              style: TextStyle(
+                                                  fontSize: 13.px,
+                                                  fontWeight: FontWeight.w400,
+                                                  fontFamily: 'segoeui',
+                                                  color:
+                                                      const Color(0xff404040)),
+                                            ),
+                                          )
+                                        ]),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   )
                 : selectedIndex.value == 1
                     ? viewDetail.value == true
                         ? resturantDetail(selectedIndex1.value)
-                        :getResturantsController
-                .allResturant
-                .value==null?const Center(child:  Text('There is No Restaurant founds')): Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 2.5.h),
-                            child: Column(
-                              children: [
-                                getVerSpace(1.h),
-                                customTextFormField(
-                                   onChanged:(value){
-                                     getResturantsController.searchRestaurantsByName(value);
-                                     // filterSearchResults(value);
-                                   } ,
-                                  searchControllerForResturant,
-                                  'Search menu, restaurant or etc',
-                                  isObsecure: false,
-                                  prefixIcon: Icons.search_sharp,
-                                  iconColor: const Color(0xff878787),
-                                ),
-                                getVerSpace(1.h),
-                getResturantsController.allResturant.value?.data?.length != 0
-                    ? Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    itemCount:getResturantsController. searchResults.isEmpty
-                        ? getResturantsController.allResturant.value?.data?.length
-                        : getResturantsController.searchResults.length,
-                    itemBuilder: (context, index) {
-                      final restaurant =getResturantsController. searchResults.isEmpty
-                          ? getResturantsController.allResturant.value!.data![index]
-                          :getResturantsController. searchResults[index];
-
-                      return Container(
-                        margin: EdgeInsets.symmetric(vertical: 1.h),
-                        height: 26.h,
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              offset: const Offset(0, 2),
-                              spreadRadius: 2,
-                              blurRadius: 2,
-                            )
-                          ],
-                          image: restaurant.images!.isEmpty
-                              ? const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/pngs/resturent.png'))
-                              : DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage('${restaurant.images![0]}'),
-                          ),
-                          borderRadius: BorderRadius.circular(16.px),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(8.0),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(16.px),
-                                  bottomLeft: Radius.circular(16.px),
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        restaurant.name ?? "Belmond Copacabana",
-                                        style: TextStyle(
-                                          fontSize: 12.px,
-                                          fontWeight: FontWeight.w600,
-                                          fontFamily: 'segoeui',
-                                          color: const Color(0xff404040),
-                                        ),
-                                      ),
-                                      Text(
-                                        restaurant.location ?? 'Address: Av. Atlântica, 1702',
-                                        style: TextStyle(
-                                          fontSize: 9.px,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'segoeui',
-                                          color: const Color(0xff404040),
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          RatingBar.builder(
-                                            initialRating: (restaurant.averageRating ?? 5).toDouble(),
-                                            minRating: 0,
-                                            direction: Axis.horizontal,
-                                            allowHalfRating: false,
-                                            itemCount: 5,
-                                            itemSize: 2.5.h,
-                                            itemPadding: const EdgeInsets.symmetric(horizontal: .5),
-                                            itemBuilder: (context, _) => const Icon(
-                                              Icons.star,
-                                              color: Color(0xffFFA500),
-                                            ),
-                                            onRatingUpdate: (rating) {},
-                                            ignoreGestures: true,
-                                            tapOnlyMode: true,
-                                          ),
-                                          getHorSpace(1.h),
-                                          Text(
-                                            '${(restaurant.averageRating ?? 5.0).toStringAsFixed(2)}',
-                                            style: TextStyle(
-                                              fontSize: 12.px,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      viewDetail.value = true;
-                                      selectedIndex1.value = index;
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      height: 3.h,
-                                      width: 7.h,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.1),
-                                            offset: const Offset(0, 2),
-                                            spreadRadius: 2,
-                                            blurRadius: 2,
-                                          )
-                                        ],
-                                      ),
-                                      child: Text(
-                                        'View',
-                                        style: CustomTextStyles.buttonTextStyle,
-                                      ),
+                        : getResturantsController.allResturant.value == null
+                            ? const Center(
+                                child: Text('There is No Restaurant founds'),
+                              )
+                            : Padding(
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 2.5.h),
+                                child: Column(
+                                  children: [
+                                    getVerSpace(1.h),
+                                    customTextFormField(
+                                      onChanged: (value) {
+                                        getResturantsController
+                                            .searchRestaurantsByName(value);
+                                        // filterSearchResults(value);
+                                      },
+                                      searchControllerForResturant,
+                                      'Search menu, restaurant or etc',
+                                      isObsecure: false,
+                                      prefixIcon: Icons.search_sharp,
+                                      iconColor: const Color(0xff878787),
                                     ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                )
-                    : const Text('There is no Resturant '),
-
-                getVerSpace(8.h),
-
-                              ],
-                            ),
-                          )
+                                    getVerSpace(1.h),
+                                    getResturantsController.allResturant.value
+                                                ?.data?.length !=
+                                            0
+                                        ? Expanded(
+                                            child: ListView.builder(
+                                              shrinkWrap: true,
+                                              padding: EdgeInsets.zero,
+                                              itemCount: getResturantsController
+                                                      .searchResults.isEmpty
+                                                  ? getResturantsController
+                                                      .allResturant
+                                                      .value
+                                                      ?.data
+                                                      ?.length
+                                                  : getResturantsController
+                                                      .searchResults.length,
+                                              itemBuilder: (context, index) {
+                                                final restaurant =
+                                                    getResturantsController
+                                                            .searchResults
+                                                            .isEmpty
+                                                        ? getResturantsController
+                                                            .allResturant
+                                                            .value!
+                                                            .data![index]
+                                                        : getResturantsController
+                                                                .searchResults[
+                                                            index];
+                                                return Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 1.h),
+                                                  height: 26.h,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  decoration: BoxDecoration(
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.1),
+                                                        offset:
+                                                            const Offset(0, 2),
+                                                        spreadRadius: 2,
+                                                        blurRadius: 2,
+                                                      )
+                                                    ],
+                                                    image: restaurant
+                                                            .images!.isEmpty
+                                                        ? const DecorationImage(
+                                                            fit: BoxFit.cover,
+                                                            image: AssetImage(
+                                                                'assets/pngs/resturent.png'))
+                                                        : DecorationImage(
+                                                            fit: BoxFit.cover,
+                                                            image: NetworkImage(
+                                                                '${restaurant.images![0]}'),
+                                                          ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            16.px),
+                                                  ),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
+                                                    children: [
+                                                      Container(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        alignment:
+                                                            Alignment.center,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    16.px),
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    16.px),
+                                                          ),
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  restaurant
+                                                                          .name ??
+                                                                      "Belmond Copacabana",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        12.px,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    fontFamily:
+                                                                        'segoeui',
+                                                                    color: const Color(
+                                                                        0xff404040),
+                                                                  ),
+                                                                ),
+                                                                Text(
+                                                                  restaurant
+                                                                          .location ??
+                                                                      'Address: Av. Atlântica, 1702',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        9.px,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    fontFamily:
+                                                                        'segoeui',
+                                                                    color: const Color(
+                                                                        0xff404040),
+                                                                  ),
+                                                                ),
+                                                                Row(
+                                                                  children: [
+                                                                    RatingBar
+                                                                        .builder(
+                                                                      initialRating:
+                                                                          (restaurant.averageRating ?? 5)
+                                                                              .toDouble(),
+                                                                      minRating:
+                                                                          0,
+                                                                      direction:
+                                                                          Axis.horizontal,
+                                                                      allowHalfRating:
+                                                                          false,
+                                                                      itemCount:
+                                                                          5,
+                                                                      itemSize:
+                                                                          2.5.h,
+                                                                      itemPadding: const EdgeInsets
+                                                                          .symmetric(
+                                                                          horizontal:
+                                                                              .5),
+                                                                      itemBuilder:
+                                                                          (context, _) =>
+                                                                              const Icon(
+                                                                        Icons
+                                                                            .star,
+                                                                        color: Color(
+                                                                            0xffFFA500),
+                                                                      ),
+                                                                      onRatingUpdate:
+                                                                          (rating) {},
+                                                                      ignoreGestures:
+                                                                          true,
+                                                                      tapOnlyMode:
+                                                                          true,
+                                                                    ),
+                                                                    getHorSpace(
+                                                                        1.h),
+                                                                    Text(
+                                                                      '${(restaurant.averageRating ?? 5.0).toStringAsFixed(2)}',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            12.px,
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            GestureDetector(
+                                                              onTap: () {
+                                                                viewDetail
+                                                                        .value =
+                                                                    true;
+                                                                selectedIndex1
+                                                                        .value =
+                                                                    index;
+                                                              },
+                                                              child: Container(
+                                                                alignment:
+                                                                    Alignment
+                                                                        .center,
+                                                                height: 3.h,
+                                                                width: 7.h,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              30),
+                                                                  color: Colors
+                                                                      .white,
+                                                                  boxShadow: [
+                                                                    BoxShadow(
+                                                                      color: Colors
+                                                                          .grey
+                                                                          .withOpacity(
+                                                                              0.1),
+                                                                      offset:
+                                                                          const Offset(
+                                                                              0,
+                                                                              2),
+                                                                      spreadRadius:
+                                                                          2,
+                                                                      blurRadius:
+                                                                          2,
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                                child: Text(
+                                                                  'View',
+                                                                  style: CustomTextStyles
+                                                                      .buttonTextStyle,
+                                                                ),
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          )
+                                        : const Text('There is no Resturant '),
+                                    getVerSpace(8.h),
+                                  ],
+                                ),
+                              )
                     : selectedIndex.value == 3
                         ? Padding(
                             padding: EdgeInsets.symmetric(horizontal: 2.5.h),
@@ -903,22 +1007,29 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           fontFamily: 'segoeui',
                           color: const Color(0xff404040)),
                     ),
-                     const Expanded(child: SizedBox()),
+                    const Expanded(child: SizedBox()),
                     InkWell(
                       onTap: () {
-                     addReviewsController.getResturantReview(getResturantsController.allResturant
-                         .value!.data![selectedIndex1.value].id).then((value) {
-                       Get.to(()=>RateResturant(resturantId: getResturantsController.allResturant
-                           .value!.data![selectedIndex1.value].id));
-
-                     });
-
-
+                        addReviewsController
+                            .getResturantReview(getResturantsController
+                                .allResturant
+                                .value!
+                                .data![selectedIndex1.value]
+                                .id)
+                            .then((value) {
+                          Get.to(() => RateResturant(
+                              resturantId: getResturantsController.allResturant
+                                  .value!.data![selectedIndex1.value].id));
+                        });
                       },
                       child: RatingBar.builder(
-                        initialRating:
-                        (getResturantsController.allResturant.value!.data![selectedIndex1.value].averageRating ?? 5).toDouble(),
-
+                        initialRating: (getResturantsController
+                                    .allResturant
+                                    .value!
+                                    .data![selectedIndex1.value]
+                                    .averageRating ??
+                                5)
+                            .toDouble(),
                         minRating: 0,
                         direction: Axis.horizontal,
                         allowHalfRating: false,
@@ -927,7 +1038,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                         itemPadding: const EdgeInsets.symmetric(horizontal: .5),
                         itemBuilder: (context, _) => const Icon(
                           Icons.star,
-                          color:Color(0xffFFA500),
+                          color: Color(0xffFFA500),
                         ),
                         onRatingUpdate: (rating) {
                           print(rating);
@@ -978,8 +1089,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                     Get.to(()=>const MenuScreen(),arguments: selectedIndex1.value);
-
+                        Get.to(() => const MenuScreen(),
+                            arguments: selectedIndex1.value);
                       },
                       child: Container(
                           padding: const EdgeInsets.all(6.0),
@@ -1015,9 +1126,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     GestureDetector(
                       onTap: () {
                         getResturantsController.getResturants();
-                        Get.to(() =>  ReservationScreen(selectedIndex:selectedIndex1.value ,
-                          restaurantId: getResturantsController.allResturant.value!.data![selectedIndex1.value].id,
-                        ));
+                        Get.to(() => ReservationScreen(
+                              selectedIndex: selectedIndex1.value,
+                              restaurantId: getResturantsController.allResturant
+                                  .value!.data![selectedIndex1.value].id,
+                            ));
                       },
                       child: Container(
                         padding: const EdgeInsets.all(2.0),
