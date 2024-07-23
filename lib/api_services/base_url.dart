@@ -1,3 +1,3 @@
-class BaseUrl{
-  static String url='https://boli.azurewebsites.net/';
+class BaseUrl {
+  static String url = 'add your base Url';
 }
