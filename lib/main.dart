@@ -1,4 +1,4 @@
-import 'package:boli_app/utils/bottomnavigationBar.dart';
+import 'package:boli_app/view/home_screens/home_screen.dart';
 import 'package:boli_app/view/splashScreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       return const GetMaterialApp(
           title: 'Boli App',
           debugShowCheckedModeBanner: false,
-          home: SplashScreen());
+          home: HomeScreen());
     });
   }
 }
